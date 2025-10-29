@@ -1,0 +1,80 @@
+/* Main CSS File - Modular Architecture */
+/* LibraryCommon HTMX Job Search Application */
+/* Following BEM naming conventions and modular structure */
+
+/* ===== BASE STYLES ===== */
+/* Core styles, variables, and resets */
+@import url('base/variables.css');
+@import url('base/reset.css');
+@import url('base/typography.css');
+
+/* ===== LAYOUT COMPONENTS ===== */
+/* Layout structure and positioning */
+@import url('layout/header.css');
+@import url('layout/sidebar.css');
+@import url('layout/main-content.css');
+
+/* ===== UI COMPONENTS ===== */
+/* Reusable UI components */
+@import url('components/buttons.css');
+
+/* Legacy components (to be refactored) */
+@import url('modules/components.css');
+@import url('modules/datagrid.css');
+
+/* ===== UTILITIES ===== */
+/* Single-purpose utility classes */
+@import url('utilities/spacing.css');
+@import url('utilities/text.css');
+
+/* ===== PAGE-SPECIFIC STYLES ===== */
+/* Page-specific overrides and custom styles */
+/* @import url('pages/job-search.css'); */
+/* @import url('pages/home.css'); */
+
+/* ===== LEGACY SUPPORT ===== */
+/* Temporary support for old naming conventions */
+/* TODO: Remove after migration is complete */
+
+/* Legacy class overrides to use new variables */
+.sidebar.open {
+  left: var(--hamburger-width);
+}
+
+.main-content.sidebar-open {
+  margin-left: calc(var(--hamburger-width) + var(--sidebar-width));
+}
+
+/* Legacy notification styles using new variables */
+.notification {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+}
+
+.notification-success {
+  background: var(--color-success-light);
+  color: var(--color-success-dark);
+  border: 1px solid var(--color-success);
+}
+
+.notification-error {
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+  border: 1px solid var(--color-danger);
+}
+
+.notification-info {
+  background: var(--color-info-light);
+  color: var(--color-info-dark);
+  border: 1px solid var(--color-info);
+}
+
+.notification-warning {
+  background: var(--color-warning-light);
+  color: var(--color-warning-dark);
+  border: 1px solid var(--color-warning);
+}

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
+        <title>ScottRider.com</title>
+        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+        <link rel="stylesheet" href="/css/main.css?v=<%= Date.now() %>">
+    </head>
+    <body>
+        <!-- Top Header Section -->
+        <header class="header">
+            <div class="header__brand">ScottRider.com</div>
+            <div class="header__search">
+                <input type="text" placeholder="Search..." class="header__search-input">
+                <button class="header__search-button">🔍</button>
+            </div>
+        </header>
+
+        <!-- Hamburger Column -->
+        <div class="hamburger-column" id="buttonNavigation">
+            <!-- Column Buttons -->
+            <button class="hamburger" onclick="toggleSidebar()">
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
+            </button>
+            <button class="column-button" onclick="showView('settings')" title="Settings">
+                <span class="column-icon">⚙️</span>
+            </button>
+            <button class="column-button" onclick="showView('login')" title="Login">
+                <span class="column-icon login-icon">●</span>
+            </button>
+        </div>
+
+        <!-- Left Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="navigation__buttons">
+                <button class="navigation__button active" hx-get="/home" hx-target="#main-content">
+                    <span class="navigation__icon">🏠</span>
+                    Home
+                </button>
+                <button class="navigation__button" hx-get="/jobsearch" hx-target="#main-content">
+                    <span class="navigation__icon">💼</span>
+                    Job Search
+                </button>
+                <button class="navigation__button" hx-get="/about" hx-target="#main-content">
+                    <span class="navigation__icon">👨‍💻</span>
+                    About
+                </button>
+                <button class="navigation__button" hx-get="/contact" hx-target="#main-content">
+                    <span class="navigation__icon">📧</span>
+                    Contact
+                </button>
+                <button class="navigation__button" hx-get="/blog" hx-target="#main-content">
+                    <span class="navigation__icon">📝</span>
+                    Blog
+                </button>
+                <button class="navigation__button" hx-get="/tools" hx-target="#main-content">
+                    <span class="navigation__icon">🛠️</span>
+                    Tools
+                </button>
+                <button class="navigation__button" hx-get="/visual-testing" hx-target="#main-content">
+                    <span class="navigation__icon">📸</span>
+                    Visual Testing
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="main-content">
+            <div class="top-spacer"></div>
+            <div class="welcome-section">
+                <h1>Welcome to ScottRider.com</h1>
+                <p>A developer's portfolio and project showcase</p>
+                
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>Latest Projects</h3>
+                        <p>Explore my recent development work and contributions.</p>
+                        <button class="btn btn-primary" hx-get="/projects" hx-target="#main-content">
+                            View Projects
+                        </button>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h3>Development Tools</h3>
+                        <p>Interactive utilities and development resources.</p>
+                        <button class="btn btn-primary" hx-get="/tools" hx-target="#main-content">
+                            Explore Tools
+                        </button>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h3>Technical Blog</h3>
+                        <p>Insights, tutorials, and development experiences.</p>
+                        <button class="btn btn-primary" hx-get="/blog" hx-target="#main-content">
+                            Read Blog
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Overlay for mobile -->
+        <div class="overlay" id="overlay"></div>
+
+        <script>
+            // Navigation handled by external modules
+            
+            function showView(viewName) {
+                // Capitalize the view name for title
+                const viewTitle = viewName.charAt(0).toUpperCase() + viewName.slice(1);
+                
+                // Load content with view name as title
+                htmx.ajax('GET', `/${viewName}`, {target: '#main-content'});
+            }
+
+            function showSettings() {
+                showView('settings');
+            }
+
+            function showLogin() {
+                showView('login');
+            }
+
+            function performSearch() {
+                const searchInput = document.querySelector('.search-input');
+                const searchTerm = searchInput.value.trim();
+                
+                if (searchTerm) {
+                    // Check if we're on the jobsearch page and positions tab is active
+                    const positionsTab = document.getElementById('positions-tab');
+                    if (positionsTab && positionsTab.classList.contains('active')) {
+                        filterPositionsData(searchTerm);
+                    } else {
+                        // For other pages, just log the search term
+                        console.log('Searching for:', searchTerm);
+                    }
+                } else {
+                    // Clear filter if search is empty
+                    const positionsTab = document.getElementById('positions-tab');
+                    if (positionsTab && positionsTab.classList.contains('active')) {
+                        filterPositionsData('');
+                    }
+                }
+            }
+            
+            function filterPositionsData(searchTerm) {
+                const rows = document.querySelectorAll('#positions-body tr');
+                const lowerSearchTerm = searchTerm.toLowerCase();
+                
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    let matchFound = false;
+                    
+                    // Search in first 6 columns (excluding actions column)
+                    for (let i = 0; i < Math.min(cells.length - 1, 6); i++) {
+                        const cellText = cells[i].textContent.toLowerCase();
+                        if (cellText.includes(lowerSearchTerm)) {
+                            matchFound = true;
+                            break;
+                        }
+                    }
+                    
+                    row.style.display = matchFound || searchTerm === '' ? '' : 'none';
+                });
+            }
+
+            // Add search functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                const searchBtn = document.querySelector('.search-btn');
+                const searchInput = document.querySelector('.search-input');
+                
+                searchBtn.addEventListener('click', performSearch);
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        performSearch();
+                    }
+                });
+            });
+
+            // Set active navigation button
+            document.addEventListener('htmx:afterSwap', function(evt) {
+                // Remove active class from all nav buttons
+                document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button (if it exists)
+                if (evt.detail.requestConfig && evt.detail.requestConfig.triggeringEvent) {
+                    const triggerElement = evt.detail.requestConfig.triggeringEvent.target;
+                    if (triggerElement.classList.contains('nav-btn')) {
+                        triggerElement.classList.add('active');
+                    }
+                }
+            });
+        </script>
+        
+        <!-- External JavaScript Modules -->
+        <script src="/js/navigation.js?v=<%= Date.now() %>"></script>
+        <script src="/js/search.js?v=<%= Date.now() %>"></script>
+        <script src="/js/crud.js?v=<%= Date.now() %>"></script>
+    </body>
+</html>

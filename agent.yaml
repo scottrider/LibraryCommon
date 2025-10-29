@@ -1,0 +1,567 @@
+# LibraryCommon Project AI Agent Configuration
+# Project-specific configuration for HTMX Node.js web application
+
+## Project Context
+project_type: "htmx-node-starter"
+project_stack: 
+  - "Node.js (LTS)"
+  - "Express.js"
+  - "HTMX"
+  - "EJS templates"
+  - "Python backend integration"
+
+project_purpose: "Lightweight server-rendered HTMX app with dynamic partial updates and Python backend services"
+
+## MASTER AGENT EDICTS
+# These rules apply to ALL projects and cannot be overridden
+
+master_edicts:
+  css_architecture:
+    law: "MANDATORY MODULAR CSS SEPARATION"
+    status: "NON-NEGOTIABLE"
+    applies_to: "ALL web projects"
+    
+    requirements:
+      file_organization:
+        structure: |
+          public/css/
+          ├── main.css                    # Single entry point
+          ├── base/
+          │   ├── variables.css          # Design tokens
+          │   ├── reset.css              # Normalize styles
+          │   └── typography.css         # Font definitions
+          ├── layout/
+          │   ├── header.css             # Page header
+          │   ├── sidebar.css            # Navigation
+          │   └── main-content.css       # Content layout
+          ├── components/
+          │   ├── buttons.css            # Button variants
+          │   ├── forms.css              # Form elements
+          │   ├── modals.css             # Modal dialogs
+          │   └── [component].css        # Individual components
+          ├── pages/
+          │   └── [page-name].css        # Page-specific styles
+          └── utilities/
+              ├── spacing.css            # Margin/padding
+              ├── text.css               # Text utilities
+              └── display.css            # Display utilities
+      
+      naming_methodology: "BEM (Block__Element--Modifier)"
+      design_tokens: "MANDATORY CSS custom properties"
+      single_entry_point: "main.css imports all modules"
+      legacy_support: "Backward compatibility during migration"
+    
+    enforcement:
+      violations_prohibited:
+        - "Monolithic CSS files >500 lines"
+        - "Inline styles (except dynamic JS values)"
+        - "Magic numbers without design tokens"
+        - "Non-semantic class names"
+        - "Duplicate CSS rules across files"
+      
+      audit_triggers:
+        - "Any CSS file exceeding 500 lines"
+        - "Missing CSS variable usage"
+        - "New components without modular structure"
+        - "Inline styles in HTML templates"
+    
+    benefits:
+      - "Maintainable and scalable stylesheets"
+      - "Clear separation of concerns"
+      - "Reusable component architecture"
+      - "Consistent design system"
+      - "Easier debugging and modification"
+      - "Team collaboration efficiency"
+
+  visual_regression_testing:
+    law: "MANDATORY VISUAL DOCUMENTATION AND COMPARISON"
+    status: "NON-NEGOTIABLE"
+    applies_to: "ALL UI/CSS changes"
+    
+    requirements:
+      screenshot_protocol:
+        timing: "BEFORE and AFTER every UI modification"
+        scope: "Full page and component-level captures"
+        browsers: "Primary target browser minimum"
+        viewports: "Desktop (1920x1080) and Mobile (375x667)"
+        states: "Default, hover, active, error states"
+      
+      historical_baseline:
+        minimum: "3 historical reference screenshots"
+        comparison: "Side-by-side visual diff analysis"
+        documentation: "Annotated comparison with identified changes"
+        approval: "Visual regression must be explicitly approved"
+      
+      automation_tools:
+        preferred: 
+          - "Browser screenshot APIs"
+          - "Playwright/Puppeteer for automation"
+          - "Visual diff tools (Percy, Chromatic, BackstopJS)"
+        manual_fallback: "Browser dev tools screenshot when automation unavailable"
+      
+      storage_structure: |
+        screenshots/
+        ├── baseline/
+        │   ├── [date]-[component]-[state].png
+        │   └── [date]-[page]-[viewport].png
+        ├── current/
+        │   └── [date]-[component]-[state].png
+        ├── diffs/
+        │   └── [date]-comparison-[component].png
+        └── approved/
+            └── [date]-[component]-approved.png
+    
+    enforcement:
+      triggers:
+        - "Any CSS file modification"
+        - "HTML template changes affecting layout"
+        - "JavaScript changes affecting UI state"
+        - "New component implementation"
+        - "Responsive design modifications"
+      
+      violations_prohibited:
+        - "UI changes without visual documentation"
+        - "Deploying without visual regression approval"
+        - "Ignoring visual differences without justification"
+        - "Missing baseline comparison screenshots"
+      
+      quality_gates:
+        - "Before/after screenshots REQUIRED for PR approval"
+        - "Visual regression report must accompany UI changes"
+        - "Broken layouts must be fixed before merge"
+        - "Mobile responsiveness verification required"
+    
+    workflow:
+      pre_change:
+        - "Capture baseline screenshots of affected components"
+        - "Document current visual state with annotations"
+        - "Identify components that will be impacted"
+      
+      post_change:
+        - "Capture identical screenshots after modifications"
+        - "Generate visual diff comparison"
+        - "Document intentional vs unintentional changes"
+        - "Verify responsive behavior across viewports"
+      
+      analysis_checklist:
+        - "Layout and positioning integrity"
+        - "Typography and font rendering"
+        - "Color and contrast accuracy"
+        - "Spacing and alignment consistency"
+        - "Interactive element states (buttons, forms)"
+        - "Navigation functionality and appearance"
+        - "Mobile responsiveness"
+        - "Cross-browser compatibility"
+    
+    benefits:
+      - "Immediate visual regression detection"
+      - "Historical UI evolution tracking"
+      - "Client/stakeholder visual approval process"
+      - "Reduced manual testing overhead"
+      - "Documentation of UI decision rationale"
+      - "Faster debugging of layout issues"
+
+## AI Safety Mode
+ai_safety_mode: enabled
+interaction_level: read_only
+
+## Project-Specific Rules
+project_scope:
+  - Code analysis and review allowed
+  - File reading for context allowed
+  - NO code generation when safety mode enabled
+  - NO file system operations when safety mode enabled
+  - NO terminal commands when safety mode enabled
+  - Explanations and guidance only
+
+## AI Safety Mode Enforcement
+ai_safety_enforcement:
+  hard_restriction: true
+  bypass_allowed: false
+  check_before_operations: true
+  
+  when_safety_enabled:
+    file_operations: BLOCKED
+    code_generation: BLOCKED
+    terminal_commands: BLOCKED
+    package_installation: BLOCKED
+    
+  allowed_operations:
+    - file_reading
+    - analysis
+    - recommendations
+    - explanations
+    - todo_list_generation
+    - planning_and_strategy
+
+## Safety Mode Workflow
+safety_mode_workflow:
+  when_enabled:
+    primary_action: "Generate comprehensive todo list"
+    secondary_actions:
+      - "Analyze current codebase"
+      - "Identify best practices violations"
+      - "Plan implementation strategy"
+      - "Provide detailed recommendations"
+      - "Create step-by-step guidance"
+    
+  todo_list_focus:
+    - "Break down complex tasks into actionable items"
+    - "Prioritize tasks by dependency order"
+    - "Include specific file paths and line numbers"
+    - "Identify potential issues before implementation"
+    - "Estimate complexity and time requirements"
+
+## Safety Mode Restrictions
+safety_restrictions:
+  when_enabled:
+    - "NO file creation or modification"
+    - "NO code generation or editing"
+    - "NO terminal command execution"
+    - "NO package installations"
+    - "Read-only access to existing files"
+    - "Analysis and recommendations only"
+  
+  override_requires:
+    - "Explicit user command to disable ai_safety_mode"
+    - "Change ai_safety_mode from 'enabled' to 'disabled'"
+    - "Confirmation of development mode activation"
+
+## Development Guidelines
+development_focus:
+  - Server-rendered HTMX applications
+  - Express.js route handling
+  - EJS template management
+  - Python backend integration
+  - Unit testing implementation
+  - RESTful API design
+  - Static file serving
+
+development_constraints:
+  mandatory_compliance:
+    - "MUST follow Master Agent Edicts (non-negotiable)"
+    - "CSS modular architecture is MANDATORY"
+    - "BEM naming methodology is REQUIRED"
+    - "Design tokens must be used for all values"
+    - "Single CSS entry point (main.css) is REQUIRED"
+    - "Visual regression testing is MANDATORY for UI changes"
+    - "Before/after screenshots REQUIRED for all CSS modifications"
+  
+  quality_gates:
+    - "CSS files cannot exceed 500 lines"
+    - "All components must be modular"
+    - "Legacy compatibility during transitions"
+    - "Documentation required for naming conventions"
+    - "Visual regression approval required for UI changes"
+    - "Screenshot comparison must accompany CSS modifications"
+
+## Data and API Specifications
+specifications:
+  schema:
+    type: "flat JSON schema"
+    description: "All data structures should follow flat JSON schema principles for simplicity and performance"
+    requirements:
+      - "Simple, flat object structures"
+      - "Minimal nesting for optimal performance"
+      - "Clear property definitions"
+      - "Type validation support"
+  
+  data:
+    normalization:
+      required: true
+      description: "Data must be normalized to eliminate redundancy and maintain referential integrity"
+      principles:
+        - "Each entity should have a unique identifier"
+        - "Related data should be referenced by foreign keys"
+        - "No duplicate data across entities"
+        - "Maintain referential integrity between related entities"
+      implementation:
+        - "Primary keys for all entities"
+        - "Foreign key relationships clearly defined"
+        - "Lookup tables for categorical data"
+        - "Consistent data types across relations"
+  
+  api:
+    documentation:
+      tool: "Swagger"
+      purpose: "UI documentation and interactive API testing"
+      requirements:
+        - "Auto-generated API documentation"
+        - "Interactive endpoint testing"
+        - "Schema validation display"
+        - "Example request/response formats"
+        - "OpenAPI 3.0 specification compliance"
+    
+    implementation:
+      language: "Python"
+      purpose: "Backend API endpoints implementation"
+      framework: "FastAPI or Flask"
+      requirements:
+        - "RESTful endpoint design"
+        - "Proper HTTP status codes"
+        - "JSON request/response handling"
+        - "Error handling and validation"
+        - "Type hints and validation"
+    
+    best_practices:
+      required: true
+      standards:
+        - "RESTful API design patterns"
+        - "Consistent naming conventions"
+        - "Proper HTTP methods (GET, POST, PUT, DELETE)"
+        - "Status code standards (200, 201, 400, 404, 500)"
+        - "Request/response validation"
+        - "Error handling with meaningful messages"
+        - "API versioning strategy"
+        - "Authentication and authorization"
+        - "Rate limiting and throttling"
+        - "Pagination for large datasets"
+        - "CORS configuration"
+        - "Input sanitization and security"
+
+## Frontend Best Practices
+frontend_standards:
+  css_organization:
+    required: true
+    edict: "MANDATORY MODULAR CSS ARCHITECTURE"
+    architecture:
+      type: "BEM-based modular CSS system"
+      structure:
+        - "base/ - CSS reset, variables, typography"
+        - "layout/ - Header, sidebar, main-content layouts"
+        - "components/ - Reusable UI components (buttons, forms, modals)"
+        - "pages/ - Page-specific styles"
+        - "utilities/ - Single-purpose utility classes"
+      entry_point: "main.css imports all modules"
+    
+    naming_conventions:
+      methodology: "BEM (Block Element Modifier)"
+      patterns:
+        blocks: ".component-name"
+        elements: ".component-name__element"
+        modifiers: ".component-name--modifier"
+        states: ".is-active, .is-open, .has-error"
+        utilities: ".u-text-center, .u-margin-top-4"
+        js_hooks: ".js-toggle-sidebar (styling forbidden)"
+    
+    design_system:
+      css_variables: "MANDATORY - All values must use CSS custom properties"
+      tokens:
+        - "Color palette with semantic naming"
+        - "Spacing scale (space-1 through space-20)"
+        - "Typography scale with consistent line heights"
+        - "Shadow system for elevation"
+        - "Border radius system"
+        - "Transition timing standards"
+    
+    enforcement:
+      prohibited:
+        - "Large monolithic CSS files"
+        - "Inline styles (except for dynamic values)"
+        - "Magic numbers (must use design tokens)"
+        - "Vendor prefixes (use autoprefixer)"
+        - "!important overrides (except utilities)"
+      
+      required:
+        - "All new components must follow BEM methodology"
+        - "CSS variables for all design values"
+        - "Modular file organization"
+        - "Legacy compatibility during migration"
+        - "Documentation of naming conventions"
+    
+    migration_strategy:
+      approach: "Progressive enhancement"
+      steps:
+        - "Preserve existing classes for backward compatibility"
+        - "Implement new architecture alongside legacy"
+        - "Gradually migrate components to new naming"
+        - "Remove legacy classes after migration complete"
+    
+    principles:
+      - "Modular CSS organization over single large files"
+      - "Component-based styling structure"
+      - "CSS custom properties for theming and consistency"
+      - "Responsive design patterns with mobile-first approach"
+      - "Semantic naming over presentation-based naming"
+    
+  javascript_organization:
+    required: true
+    principles:
+      - "External JS files over inline scripts"
+      - "Module-based organization"
+      - "Event delegation patterns"
+      - "Proper error handling for AJAX requests"
+      - "Loading states and user feedback"
+    
+  accessibility_standards:
+    required: false  # Personal project exception
+    focus_management:
+      required: true
+      features:
+        - "Keyboard navigation support (Tab/Shift+Tab)"
+        - "Escape key to close modals/sidebars"
+        - "Focus trapping in overlays"
+        - "Logical tab order"
+        - "Visual focus indicators"
+    
+  security_headers:
+    required: true
+    headers:
+      - "Content-Security-Policy (CSP)"
+      - "X-Frame-Options"
+      - "X-Content-Type-Options"
+      - "Referrer-Policy"
+    
+  performance_standards:
+    required: true
+    practices:
+      - "Asset minification and compression"
+      - "Image optimization"
+      - "Lazy loading for large datasets"
+      - "Debounced search input"
+      - "Efficient DOM manipulation"
+
+## Project Structure Requirements
+structure_compliance:
+  directories:
+    - "NodeServerMock/" # Python backend services
+    - "Testers/PersonalSite/" # HTMX frontend application
+    - "public/" # Static assets (css, js)
+    - "views/" # EJS templates
+    - "routes/" # Express route handlers
+    - "partials/" # HTMX partial templates
+  
+  key_files:
+    - "package.json" # Node.js dependencies and scripts
+    - ".gitignore" # Version control exclusions
+    - ".env" # Environment configuration
+    - "server.js" # Express application entry point
+    - "README.md" # Project documentation
+
+## Testing Requirements
+testing_framework:
+  javascript:
+    - framework: "Jest"
+    - focus: "HTMX interactions, route responses"
+    - target: "/ut_log endpoint testing"
+  
+  python:
+    - framework: "pytest"
+    - focus: "Backend service integration"
+    - target: "business_layer and data_layer testing"
+
+## HTMX Integration Specifications
+htmx_requirements:
+  cdn_integration: "htmx.org via CDN in layout"
+  interaction_patterns:
+    - "hx-get for dynamic content loading"
+    - "hx-target for DOM updates"
+    - "Partial template rendering"
+    - "Server-side response handling"
+  
+  example_endpoints:
+    - "/message" # Returns partial template
+    - "/ut_log" # Unit test logging endpoint
+
+## Development Workflow
+workflow_steps:
+  1. "Initialize package.json with start/dev scripts"
+  2. "Install express, ejs, dotenv dependencies"
+  3. "Create project directory structure"
+  4. "Implement Express server with HTMX routing"
+  5. "Create EJS templates with HTMX integration"
+  6. "Implement Python backend services"
+  7. "Add unit testing for both stacks"
+  8. "Docker containerization (optional)"
+
+## Environment Configuration
+environment_setup:
+  node_version: "LTS"
+  port: "process.env.PORT || 3000"
+  python_version: "3.14.0"
+  static_files: "/public directory"
+  view_engine: "EJS"
+
+## Development Environment Cache Control
+cache_control:
+  development_mode: "no-cache"
+  specifications:
+    server_headers:
+      - "Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate"
+      - "Pragma: no-cache"
+      - "Expires: 0"
+      - "Surrogate-Control: no-store"
+    
+    template_engine:
+      - "app.set('view cache', false)"
+      - "EJS template caching disabled"
+    
+    static_files:
+      - "etag: false"
+      - "lastModified: false"
+      - "Cache-Control headers on static assets"
+    
+    browser_meta_tags:
+      - "Cache-Control meta tag"
+      - "Pragma meta tag"
+      - "Expires meta tag"
+    
+    asset_versioning:
+      - "CSS: style.css?v=<%= Date.now() %>"
+      - "Dynamic timestamp cache busting"
+    
+    middleware_implementation: |
+      app.use((req, res, next) => {
+        res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+        res.set('Pragma', 'no-cache');
+        res.set('Expires', '0');
+        res.set('Surrogate-Control', 'no-store');
+        next();
+      });
+
+## Documentation References
+inherited_from_master:
+  - "TDD Manifesto/Principles"
+  - "Python Language Reference"
+  - "Python Developer's Guide"
+  - "C# Language Reference"
+
+## Resources Requiring Review
+review_resources:
+  - file: "master-evaluate.yaml"
+    description: "Evaluation checklist for completion tracking"
+    instructions: "Review items, complete tasks, remove confirmed items one at a time"
+    location: "repos/master-evaluate.yaml"
+
+## AI Interaction Settings
+ai_interaction:
+  enabled: true
+  mode: safety_controlled
+  code_generation: conditional  # Only when ai_safety_mode: disabled
+  file_modifications: conditional  # Only when ai_safety_mode: disabled
+  explanations: true
+  questions: true
+  todo_list_management: true  # Always allowed for planning
+  
+  safety_mode_behavior:
+    when_enabled: "todo_list_and_analysis_only"
+    when_disabled: "full_development_mode"
+    
+  enforcement_rules:
+    - "Check ai_safety_mode before ANY file operation"
+    - "Generate todo lists instead of making changes when safety enabled"
+    - "Provide analysis and recommendations only when safety enabled"
+    - "Switch to implementation mode only when safety disabled"
+
+## Response Style
+response_style:
+  tone: minimalist
+  completeness: full
+  praise: false
+  format: direct
+  guidelines:
+    - Provide complete information without fluff
+    - Skip congratulatory language
+    - Focus on essential details only
+    - Be direct and to the point
+    - Include all necessary context

@@ -1,0 +1,229 @@
+/* Typography Styles */
+/* Font definitions and text styling */
+
+/* Heading styles */
+.heading {
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-4);
+  color: var(--text-primary);
+}
+
+.heading--xl {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--space-6);
+}
+
+.heading--lg {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--space-5);
+}
+
+.heading--md {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-4);
+}
+
+.heading--sm {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-3);
+}
+
+.heading--xs {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-2);
+}
+
+/* Text styles */
+.text {
+  line-height: var(--line-height-normal);
+  margin-bottom: var(--space-4);
+}
+
+.text--lg {
+  font-size: var(--font-size-lg);
+}
+
+.text--base {
+  font-size: var(--font-size-base);
+}
+
+.text--sm {
+  font-size: var(--font-size-sm);
+}
+
+.text--xs {
+  font-size: var(--font-size-xs);
+}
+
+/* Text colors */
+.text--primary {
+  color: var(--text-primary);
+}
+
+.text--secondary {
+  color: var(--text-secondary);
+}
+
+.text--muted {
+  color: var(--text-muted);
+}
+
+.text--white {
+  color: var(--text-white);
+}
+
+.text--success {
+  color: var(--color-success);
+}
+
+.text--warning {
+  color: var(--color-warning);
+}
+
+.text--danger {
+  color: var(--color-danger);
+}
+
+.text--info {
+  color: var(--color-info);
+}
+
+/* Font weights */
+.text--light {
+  font-weight: var(--font-weight-light);
+}
+
+.text--normal {
+  font-weight: var(--font-weight-normal);
+}
+
+.text--medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.text--semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.text--bold {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Heading elements (h1-h6) */
+h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-6);
+  color: var(--text-primary);
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-5);
+  color: var(--text-primary);
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-4);
+  color: var(--text-primary);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-3);
+  color: var(--text-primary);
+}
+
+h5 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-2);
+  color: var(--text-primary);
+}
+
+h6 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-2);
+  color: var(--text-primary);
+}
+
+/* Paragraph styles */
+p {
+  line-height: var(--line-height-normal);
+  margin-bottom: var(--space-4);
+  color: var(--text-primary);
+}
+
+/* Code styles */
+code,
+pre {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: var(--font-size-sm);
+}
+
+code {
+  background: var(--bg-light);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  color: var(--color-danger);
+}
+
+pre {
+  background: var(--bg-light);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin-bottom: var(--space-4);
+}
+
+/* Link styles */
+.link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  transition: color var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--color-primary-dark);
+}
+
+.link:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* List styles */
+.list {
+  margin-bottom: var(--space-4);
+  padding-left: var(--space-6);
+}
+
+.list--unordered {
+  list-style-type: disc;
+}
+
+.list--ordered {
+  list-style-type: decimal;
+}
+
+.list--none {
+  list-style: none;
+  padding-left: 0;
+}
+
+.list__item {
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-normal);
+}

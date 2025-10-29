@@ -1,0 +1,288 @@
+/* Navigation Module CSS */
+
+/* Top Header Section */
+.top-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px 0 110px;
+    z-index: 1002;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+.site-title {
+    color: white;
+    font-size: 1.8em;
+    font-weight: 700;
+    width: 300px;
+}
+
+.search-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 80px;
+    padding: 20px 0;
+}
+
+.search-input {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    width: 300px;
+    outline: none;
+    background: rgba(255,255,255,0.9);
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    background: white;
+    box-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+.search-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.05);
+}
+
+/* Hamburger Column */
+.hamburger-column {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 80px;
+    height: calc(100vh - 80px);
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    z-index: 1001;
+    box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+}
+
+/* Hamburger Menu */
+.hamburger {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: rgba(0,0,0,0.15);
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    transition: all 0.3s ease;
+}
+
+.hamburger:hover {
+    background: rgba(0,0,0,0.25);
+    transform: scale(1.05);
+}
+
+.hamburger-line {
+    width: 24px;
+    height: 3px;
+    background: #e8e9ea;
+    margin: 2px 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.hamburger.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Column Buttons */
+.column-btn {
+    position: absolute !important;
+    right: 15px !important;
+    background: rgba(0,0,0,0.15) !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 10px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 50px !important;
+    height: 45px !important;
+    transition: all 0.3s ease !important;
+}
+
+.column-btn:nth-of-type(2) {
+    top: 75px !important;
+}
+
+.column-btn:nth-of-type(3) {
+    top: 130px !important;
+}
+
+.column-btn:nth-of-type(4) {
+    top: 185px !important;
+}
+
+.column-btn:nth-of-type(5) {
+    top: 240px !important;
+}
+
+.column-btn:hover {
+    background: rgba(0,0,0,0.25) !important;
+    transform: scale(1.05) !important;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    position: fixed;
+    top: 80px;
+    left: -320px;
+    width: 320px;
+    height: calc(100vh - 80px);
+    background: #34495e;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+    overflow-y: auto;
+}
+
+.sidebar.open {
+    left: 80px;
+}
+
+.nav-section {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-section h3 {
+    color: #bdc3c7;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.nav-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    margin: 8px 0;
+}
+
+.nav-buttons {
+    padding: 20px;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ecf0f1;
+    background: transparent;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    margin: 8px 0;
+}
+
+.nav-btn:hover {
+    background: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+    transform: translateX(5px);
+}
+
+.nav-btn.active {
+    background: #3498db;
+    color: white;
+}
+
+.nav-icon {
+    font-size: 1.2em;
+}
+
+/* Legacy support for nav-link class */
+.nav-link {
+    display: block;
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+    transform: translateX(5px);
+}
+
+.nav-link.active {
+    background: #3498db;
+    color: white;
+}
+
+/* Overlay for mobile sidebar */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Content shift when sidebar is open */
+.main-content {
+    transition: margin-left 0.3s ease;
+}
+
+.main-content.sidebar-open {
+    margin-left: 400px; /* 80px hamburger column + 320px sidebar */
+}

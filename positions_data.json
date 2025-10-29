@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "companyId": 1,
+    "position": "Senior Software Developer",
+    "initialContact": "2025-10-15",
+    "lastContact": "2025-10-28",
+    "contactType": "email",
+    "status": "interviewed",
+    "notes": "Great technical interview, awaiting next round"
+  },
+  {
+    "id": 2,
+    "companyId": 2,
+    "position": "Full Stack Engineer",
+    "initialContact": "2025-10-20",
+    "lastContact": "2025-10-25",
+    "contactType": "linkedin",
+    "status": "applied",
+    "notes": "Applied through LinkedIn, recruiter responded"
+  },
+  {
+    "id": 3,
+    "companyId": 3,
+    "position": "Backend Developer",
+    "initialContact": "2025-10-10",
+    "lastContact": "2025-10-22",
+    "contactType": "phone",
+    "status": "offer",
+    "notes": "Received offer, negotiating salary"
+  }
+]

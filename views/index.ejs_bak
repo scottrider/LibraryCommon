@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMX Node.js App</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>ScottRider.com</h1>
+    </header>
+    <nav class="nav">
+        <h1>ScottRider.com</h1>
+    </nav>
+    <main class="container">
+        <div class="welcome">Hello</div>
+    </main>
+</body>
+</html>

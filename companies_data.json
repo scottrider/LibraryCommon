@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "TechCorp Inc",
+    "city": "San Francisco",
+    "state": "CA"
+  },
+  {
+    "id": 2,
+    "name": "InnovateSoft",
+    "city": "Seattle",
+    "state": "WA"
+  },
+  {
+    "id": 3,
+    "name": "DataDrive Systems",
+    "city": "Austin",
+    "state": "TX"
+  },
+  {
+    "id": 4,
+    "name": "CloudFirst Technologies",
+    "city": "Denver",
+    "state": "CO"
+  },
+  {
+    "id": 5,
+    "name": "NextGen Solutions",
+    "city": "Boston",
+    "state": "MA"
+  }
+]
