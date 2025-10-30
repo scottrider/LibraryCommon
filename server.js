@@ -124,7 +124,8 @@ app.get('/template1', (req, res) => {
     `);
 });
 
-app.get('/jobsearch', (req, res) => {
+// REST Route: Jobs listing and search
+app.get('/jobs', (req, res) => {
     res.send(`
         <div class="welcome-section">
             <div class="tab-container">
@@ -216,6 +217,141 @@ app.get('/jobsearch', (req, res) => {
             }
         </script>
             
+    `);
+});
+
+// Backward compatibility redirect for old jobsearch route
+app.get('/jobsearch', (req, res) => {
+    res.redirect(301, '/jobs');
+});
+
+// REST Route: Individual job position page
+app.get('/jobs/:id', (req, res) => {
+    const jobId = req.params.id;
+    res.send(`
+        <div class="welcome-section">
+            <h1>Job Position #${jobId}</h1>
+            <p>📋 Individual job position details page</p>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>🎯 Position Details</h3>
+                    <div id="position-details">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
+                            <p>Loading position #${jobId}...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h3>🏢 Company Information</h3>
+                    <div id="company-details">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
+                            <p>Loading company information...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-card" style="grid-column: 1 / -1;">
+                    <h3>⚡ Actions</h3>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="editPosition(${jobId})">✏️ Edit Position</button>
+                        <button class="btn btn-secondary" onclick="viewCompany()">🏢 View Company</button>
+                        <button class="btn btn-info" onclick="goBack()">← Back to Jobs</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+        function editPosition(id) {
+            htmx.ajax('GET', '/jobs/' + id + '/edit', {target: '#main-content'});
+        }
+        
+        function viewCompany() {
+            alert('Navigate to company page');
+        }
+        
+        function goBack() {
+            htmx.ajax('GET', '/jobs', {target: '#main-content'});
+        }
+        </script>
+    `);
+});
+
+// REST Route: Companies listing page
+app.get('/companies', (req, res) => {
+    res.send(`
+        <div class="welcome-section">
+            <h1>🏢 Companies</h1>
+            <p>Manage and browse company information</p>
+            
+            <div class="content-grid">
+                <div class="content-card" style="grid-column: 1 / -1;">
+                    <h3>Company Directory</h3>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
+                        <p>🏢 Companies feature coming soon! This page will display a list of all companies.</p>
+                        <button class="btn btn-info" onclick="goBack()">← Back to Jobs</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+        function goBack() {
+            htmx.ajax('GET', '/jobs', {target: '#main-content'});
+        }
+        </script>
+    `);
+});
+
+// REST Route: Individual company page
+app.get('/companies/:id', (req, res) => {
+    const companyId = req.params.id;
+    res.send(`
+        <div class="welcome-section">
+            <h1>Company Profile #${companyId}</h1>
+            <p>🏢 Company information and related positions</p>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>🏢 Company Details</h3>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
+                        <p>Loading company #${companyId}...</p>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h3>📋 Open Positions</h3>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 6px;">
+                        <p>Loading positions...</p>
+                    </div>
+                </div>
+                
+                <div class="content-card" style="grid-column: 1 / -1;">
+                    <h3>⚡ Actions</h3>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="editCompany(${companyId})">✏️ Edit Company</button>
+                        <button class="btn btn-success" onclick="addPosition(${companyId})">➕ Add Position</button>
+                        <button class="btn btn-info" onclick="goBack()">← Back to Companies</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+        function editCompany(id) {
+            htmx.ajax('GET', '/companies/' + id + '/edit', {target: '#main-content'});
+        }
+        
+        function addPosition(companyId) {
+            htmx.ajax('GET', '/jobs/new?companyId=' + companyId, {target: '#main-content'});
+        }
+        
+        function goBack() {
+            htmx.ajax('GET', '/companies', {target: '#main-content'});
+        }
+        </script>
     `);
 });
 
@@ -419,7 +555,8 @@ app.get('/tools', (req, res) => {
     `);
 });
 
-app.get('/visual-testing', (req, res) => {
+// REST Route: Visual testing tool
+app.get('/tools/visual-testing', (req, res) => {
     res.send(`
         <div class="welcome-section">
             <h1>📸 Visual Regression Testing</h1>
@@ -518,7 +655,13 @@ app.get('/visual-testing', (req, res) => {
     `);
 });
 
-app.get('/prototyping', (req, res) => {
+// Backward compatibility redirect for old visual-testing route
+app.get('/visual-testing', (req, res) => {
+    res.redirect(301, '/tools/visual-testing');
+});
+
+// REST Route: Prototyping tool
+app.get('/tools/prototyping', (req, res) => {
     res.send(`
         <div class="welcome-section">
             <h1>🎨 HTML Prototyping with Silex</h1>
@@ -626,6 +769,11 @@ app.get('/prototyping', (req, res) => {
         }
         </script>
     `);
+});
+
+// Backward compatibility redirect for old prototyping route
+app.get('/prototyping', (req, res) => {
+    res.redirect(301, '/tools/prototyping');
 });
 
 app.get('/settings', (req, res) => {
