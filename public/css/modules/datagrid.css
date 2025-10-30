@@ -38,6 +38,26 @@
     border-bottom-color: #007bff;
 }
 
+/* Tab button with inline + button */
+.tab-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.tab-btn .btn {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    margin-left: auto;
+}
+
+.tab-btn.active .btn {
+    opacity: 1;
+    visibility: visible;
+}
+
 .tab-content {
     padding: 0;
 }
@@ -217,6 +237,42 @@
 .data-grid-empty h3 {
     margin-bottom: 10px;
     color: #495057;
+}
+
+/* DataGrid Button Overrides - Force 24x24 sizing */
+.datagrid-container .btn,
+.data-grid .btn,
+.tab-actions .btn {
+    padding: 2px !important;
+    margin: 2px !important;
+    border: none !important;
+    border-radius: 3px !important;
+    cursor: pointer !important;
+    width: 24px !important;
+    height: 24px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
+}
+
+.datagrid-container .btn--sm,
+.data-grid .btn--sm {
+    padding: 2px !important;
+    font-size: 14px !important;
+    width: 24px !important;
+    height: 24px !important;
+}
+
+/* Left-justify all data fields */
+.data-grid td,
+.data-grid th,
+.datagrid__cell,
+.datagrid__text,
+.datagrid__input,
+.datagrid__select {
+    text-align: left !important;
 }
 
 /* Responsive Design */

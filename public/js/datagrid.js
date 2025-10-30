@@ -23,6 +23,7 @@ class DataGridControl {
         this.sortField = null;
         this.sortDirection = 'asc';
         this.editingRow = null;
+        this.showDeleted = false; // Track whether to show deleted records
         
         this.init();
     }
@@ -83,7 +84,16 @@ class DataGridControl {
         // Tab switching (if present)
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                this.handleTabSwitch(e.target.dataset.tab);
+                // Don't switch tabs if clicking on the + button
+                if (e.target.classList.contains('btn') && e.target.id === 'add-position-btn') {
+                    return;
+                }
+                
+                // Get the tab name from the button that was clicked
+                const tabBtn = e.target.closest('.tab-btn');
+                if (tabBtn && tabBtn.dataset.tab) {
+                    this.handleTabSwitch(tabBtn.dataset.tab);
+                }
             });
         });
     }
@@ -97,10 +107,21 @@ class DataGridControl {
             
             const data = await response.json();
             this.data = Array.isArray(data) ? data : data.positions || [];
-            this.filteredData = [...this.data];
+            
+            // Filter data based on showDeleted setting
+            this.filteredData = this.data.filter(record => {
+                // If showDeleted is true, show only inactive/deleted records
+                // If showDeleted is false, show only active records
+                if (this.showDeleted) {
+                    return record.isInactive === true;
+                } else {
+                    return record.isInactive !== true;
+                }
+            });
+            
             this.render();
             
-            console.log('DataGrid data loaded:', this.data.length, 'records');
+            console.log('DataGrid data loaded:', this.data.length, 'total records,', this.filteredData.length, 'filtered records');
         } catch (error) {
             console.error('Failed to load data:', error);
             this.showError('Failed to load positions data. Please check the API connection.');
