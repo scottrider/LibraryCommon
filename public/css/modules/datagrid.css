@@ -108,6 +108,7 @@
     padding: 10px 15px;
     border-bottom: 1px solid #dee2e6;
     vertical-align: middle;
+    white-space: nowrap;
 }
 
 .data-grid tr:hover {
@@ -284,6 +285,7 @@
     .data-grid th,
     .data-grid td {
         padding: 8px 10px;
+        white-space: nowrap;
     }
     
     .tab-btn {
