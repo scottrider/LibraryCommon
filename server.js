@@ -139,16 +139,6 @@ app.get('/jobs', (req, res) => {
                 </div>
                 <div class="tab-ui">
                     <button class="btn btn-primary" id="add-position-btn" onclick="event.stopPropagation();">+</button>
-                    <div class="toggle-container">
-                        <label class="toggle-label">
-                            <span class="toggle-text">Inactive</span>
-                            <div class="toggle-switch">
-                                <input type="checkbox" id="show-deleted-toggle" class="toggle-input" onchange="toggleDeletedRecords(this.checked)">
-                                <span class="toggle-slider"></span>
-                            </div>
-                            <span class="toggle-text">Active</span>
-                        </label>
-                    </div>
                 </div>
                 <div class="tab-content">
                     <div id="positions-tab" class="tab-pane active">
@@ -193,26 +183,42 @@ app.get('/jobs', (req, res) => {
                 initializeJobSearchDataGrid();
             }, 100);
             
-            // Toggle function for showing active/inactive records
-            function toggleDeletedRecords(showActive) {
-                if (window.positionsGrid) {
-                    // Update the grid's filter state (inverted logic: showActive means don't show deleted)
-                    window.positionsGrid.showDeleted = !showActive;
+            // Demo toggle function for the toggle switch demonstration
+            function toggleDemoState(isActive) {
+                console.log('Demo toggle changed:', isActive ? 'Active' : 'Inactive');
+                
+                // Show a visual feedback message
+                const messageDiv = document.getElementById('demo-message');
+                if (!messageDiv) {
+                    // Create message div if it doesn't exist
+                    const div = document.createElement('div');
+                    div.id = 'demo-message';
+                    div.style.cssText = 'margin-top: 10px; padding: 8px 12px; border-radius: 4px; font-size: 0.9em; transition: all 0.3s ease;';
                     
-                    // Reload data with new filter
-                    window.positionsGrid.loadData();
-                    
-                    // Update visual feedback
-                    const toggleLabel = document.querySelector('.toggle-label');
-                    if (toggleLabel) {
-                        if (showActive) {
-                            toggleLabel.title = 'Currently showing active records';
-                        } else {
-                            toggleLabel.title = 'Currently showing inactive records';
+                    // Find the toggle switch parent and add message after it
+                    const demoToggle = document.getElementById('demo-toggle');
+                    if (demoToggle) {
+                        const parent = demoToggle.closest('div[style*="background: white"]');
+                        if (parent) {
+                            parent.appendChild(div);
                         }
                     }
-                    
-                    console.log('Toggle changed: ' + (showActive ? 'Showing active records' : 'Showing inactive records'));
+                }
+                
+                const msg = document.getElementById('demo-message');
+                if (msg) {
+                    if (isActive) {
+                        msg.textContent = '✅ Toggle is ACTIVE - Green state enabled';
+                        msg.style.backgroundColor = '#d4edda';
+                        msg.style.borderColor = '#c3e6cb';
+                        msg.style.color = '#155724';
+                    } else {
+                        msg.textContent = '❌ Toggle is INACTIVE - Red state enabled';
+                        msg.style.backgroundColor = '#f8d7da';
+                        msg.style.borderColor = '#f5c6cb';
+                        msg.style.color = '#721c24';
+                    }
+                    msg.style.border = '1px solid';
                 }
             }
         </script>
@@ -1377,15 +1383,15 @@ app.get('/settings', (req, res) => {
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 15px;">
                             <div style="background: white; padding: 15px; border-radius: 6px; border-left: 4px solid #dc3545;">
                                 <strong>Toggle Switch (Your Implementation):</strong><br>
-                                <div style="margin: 15px 0; display: flex; align-items: center; gap: 10px;">
-                                    <span>Inactive</span>
-                                    <div style="position: relative; width: 44px; height: 24px;">
-                                        <input type="checkbox" style="opacity: 0; width: 0; height: 0; position: absolute;">
-                                        <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #dc3545; border-radius: 24px; transition: all 0.3s ease;">
-                                            <span style="position: absolute; content: ''; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; border-radius: 50%; transition: all 0.3s ease;"></span>
-                                        </span>
-                                    </div>
-                                    <span>Active</span>
+                                <div style="margin: 15px 0;">
+                                    <label class="toggle-label">
+                                        <span class="toggle-text">Inactive</span>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="demo-toggle" class="toggle-input" onchange="toggleDemoState(this.checked)">
+                                            <span class="toggle-slider"></span>
+                                        </div>
+                                        <span class="toggle-text">Active</span>
+                                    </label>
                                 </div>
                                 <div style="font-size: 0.8em; color: #6c757d;">Custom CSS-styled checkbox as toggle switch</div>
                             </div>
